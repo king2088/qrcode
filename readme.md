@@ -105,6 +105,25 @@ ionic cordova platform rm ios;ionic cordova platform add ios;
 <application android:requestLegacyExternalStorage="true" />
 ```
 
+若需要对cordova-plugin-telerik-imagepicker插件进行汉语支持的话，还得进行增加对应的翻译文本，打开plugins/cordova-plugin-telerik-imagepicker/src/android/Library/res/
+新建一个名为values-zh的目录，并新建一个名为multiimagechooser_strings_zh.xml的文件，输入如下代码
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="multi_app_name">图像选择器</string>
+    <string name="free_version_label">免费版本 - 剩余图片: %d张</string>
+    <string name="error_database">打开相册出错</string>
+    <string name="requesting_thumbnails">加载中，请稍等...</string>
+    <string name="multi_image_picker_processing_images_title">图片处理中</string>
+    <string name="multi_image_picker_processing_images_message">这可能需要几分钟时间</string>
+    <string name="discard" translatable="false">取消</string>
+    <string name="done" translatable="false">确定</string>
+ </resources>
+```
+
+如果不起作用，请直接将values-zh目录复制到/platform/android/app/src/res目录下即可
+
 ## 从图片读取二维码的另一种代码形式
 
 先在index.html中导入upngJS(<https://www.npmjs.com/package/upng-js>)
@@ -172,8 +191,10 @@ ionic cordova platform rm ios;ionic cordova platform add ios;
 ## 签名release打包
 
 ```shell
+    # 打包命令
+    ionic cordova build android --prod --release
+    # 证书生成   *密码XT#123*2020
     keytool -genkey -v -keystore release-key.keystore -alias tony -keyalg RSA -keysize 2048 -validity 10000
-    # 密码XT#123*2020
     # keytool -importkeystore -srckeystore release-key.keystore -destkeystore release-key.keystore -deststoretype pkcs12
     jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore release-key.keystore ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk tony
     # Zipalign优化
@@ -188,23 +209,23 @@ ionic cordova platform rm ios;ionic cordova platform add ios;
 
 ## 语言翻译文件对应表
 
-zh-CN 简体中文.
-zh-TW 繁体台湾.
-zh-HK 繁体香港.
-en    英文.
-af    荷兰语.
-ar    阿拉伯语.
-be    白俄罗斯.
-cs    捷克.
-da    丹麦.
-fr    法语.
-de    德国.
-it    意大利.
-ja    日语.
-ko    韩语.
-ru    俄罗斯.
-es    西班牙.
-sv    瑞典.
-th    泰国.
-uk    乌克兰.
-vi    越南.
+zh-CN 简体中文
+zh-TW 繁体台湾
+zh-HK 繁体香港
+en    英文
+af    荷兰语
+ar    阿拉伯语
+be    白俄罗斯
+cs    捷克
+da    丹麦
+fr    法语
+de    德国
+it    意大利
+ja    日语
+ko    韩语
+ru    俄罗斯
+es    西班牙
+sv    瑞典
+th    泰国
+uk    乌克兰
+vi    越南

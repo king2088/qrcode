@@ -33,23 +33,39 @@ export class AppComponent {
             this.statusBar.backgroundColorByHexString('#3880ff');
             this.splashScreen.hide();
             this.hardwareBackButton();
+            this.initStorage();
+        });
+        this.setLocalLang();
+    }
+
+    initStorage() {
+        this.storage.getItem('deHistory').then(res => {
+            console.log('get deHistory success');
+        }, error => {
             this.storage.setItem('deHistory', []).then(() => {
                 console.log('create history success');
             }, err => {
                 console.log('create de history err', err);
             });
+        });
+        this.storage.getItem('genHistory').then(res => {
+            console.log('get genHistory success');
+        }, error => {
             this.storage.setItem('genHistory', []).then(() => {
                 console.log('create gen code history');
             }, err => {
                 console.log('create gen code history err', err);
             });
+        });
+        this.storage.getItem('adClickNum').then(res => {
+
+        }, error => {
             this.storage.setItem('adClickNum', 0).then(() => {
                 console.log('ad click num storage create success');
             }, err => {
                 console.log('ad click num storage create error');
             });
         });
-        this.setLocalLang();
     }
 
     setLocalLang() {
