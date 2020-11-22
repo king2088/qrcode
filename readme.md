@@ -190,11 +190,18 @@ ionic cordova platform rm ios;ionic cordova platform add ios;
 
 ## 签名release打包
 
+生成证书
+
+```shell
+    # 证书生成   *密码XT#123*2020
+    keytool -genkey -v -keystore release-key.keystore -alias tony -keyalg RSA -keysize 2048 -validity 10000
+```
+
+打release生产包
+
 ```shell
     # 打包命令
     ionic cordova build android --prod --release
-    # 证书生成   *密码XT#123*2020
-    keytool -genkey -v -keystore release-key.keystore -alias tony -keyalg RSA -keysize 2048 -validity 10000
     # keytool -importkeystore -srckeystore release-key.keystore -destkeystore release-key.keystore -deststoretype pkcs12
     jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore release-key.keystore ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk tony
     # Zipalign优化
@@ -205,7 +212,6 @@ ionic cordova platform rm ios;ionic cordova platform add ios;
     cd G:/ionic/qrcode-tab
     adb install ./tqrcode.apk
 ```
-
 
 ## 语言翻译文件对应表
 
