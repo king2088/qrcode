@@ -1,0 +1,79 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{title}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-card *ngIf="type==='deQrcode'">
+        <ion-card-header>
+            <ion-card-subtitle>{{codeFormat}}{{'SCAN_RESULT' | translate}}</ion-card-subtitle>
+            <ion-card-title>{{textType}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <div [class]="isUrl?'url-text':'not-url-text'">{{qrcodeText}}</div>
+            <div class="btn">
+                <ion-button color="primary" *ngIf="isUrl" (click)="openUrl()" size="small" class="btn-left">
+                    <ion-icon name="browsers"></ion-icon>
+                    {{'OPEN_SITE' | translate}}
+                </ion-button>
+                <ion-button color="tertiary" (click)="copy()" size="small" class="btn-right">
+                    <ion-icon name="copy"></ion-icon>{{'COPY' | translate}}
+                </ion-button>
+            </div>
+        </ion-card-content>
+    </ion-card>
+    <ion-list *ngIf="type==='genQrcode'">
+        <ion-item>
+            <ion-label>{{'TYPE' | translate}}</ion-label>
+            <ion-select interface="action-sheet" placeholder="Select" cancelText="{{'CANCEL_TEXT' | translate}}"
+                [(ngModel)]="selectType" (ionChange)="genSelectChange($event)">
+                <ion-select-option value="text">{{'TEXT' | translate}}</ion-select-option>
+                <ion-select-option value="url">{{'URL' | translate}}</ion-select-option>
+                <ion-select-option value="email">{{'EMAIL' | translate}}</ion-select-option>
+                <ion-select-option value="number">{{'NUMBER' | translate}}</ion-select-option>
+                <ion-select-option value="date">{{'DATE' | translate}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item *ngIf="selectType=='url'">
+            <ion-label position="floating">{{'URL' | translate}}</ion-label>
+            <ion-textarea clearOnEdit="true" rows="4" [(ngModel)]="textContent"
+                placeholder="Enter more information here...">
+            </ion-textarea>
+        </ion-item>
+        <ion-item *ngIf="selectType=='text'">
+            <ion-label position="floating">{{'TEXT' | translate}}</ion-label>
+            <ion-textarea clearOnEdit="true" rows="4" [(ngModel)]="textContent" placeholder="输入网址">
+            </ion-textarea>
+        </ion-item>
+        <ion-item *ngIf="selectType=='email'">
+            <ion-label position="floating">{{'EMAIL' | translate}}</ion-label>
+            <ion-input type="email" [(ngModel)]="textContent"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="selectType=='number'">
+            <ion-label position="floating">{{'NUMBER' | translate}}</ion-label>
+            <ion-input type="number" [(ngModel)]="textContent"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="selectType=='date'">
+            <ion-label position="stacked">{{'DATE' | translate}}</ion-label>
+            <ion-input type="date" [(ngModel)]="textContent"></ion-input>
+        </ion-item>
+        <div style="text-align: center;">
+            <div class="btn">
+                <ion-button color="tertiary" expand="block" (click)="generateQrcode()"
+                    [disabled]="textContent ? false : true">
+                    {{'GENERATE_QR_CODE' | translate}}
+                </ion-button>
+            </div>
+        </div>
+    </ion-list>
+    <div id="qrcode" *ngIf="qrcodeText">
+        <canvas width="512" height="512" #QRcodeCanvas></canvas>
+    </div>
+    <div class="sava-btn" *ngIf="qrcodeText">
+        <ion-button color="primary" (click)="saveQrcode()" expand="block">{{'SAVA_IMAGE' | translate}}</ion-button>
+    </div>
+</ion-content>

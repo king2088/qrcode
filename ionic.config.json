@@ -1,0 +1,7 @@
+{
+  "name": "qrcode-tab",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

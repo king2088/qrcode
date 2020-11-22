@@ -1,0 +1,47 @@
+.btn {
+    margin: 10px 0 0 0;
+
+    .btn-left {
+        float: left;
+    }
+
+    .btn-right {
+        float: right;
+    }
+
+}
+
+.btn::after {
+    content: '';
+    height: 0;
+    clear: both;
+    display: block;
+}
+
+.url-text {
+    text-decoration: underline;
+    color: cadetblue;
+}
+
+.not-url-text {
+    color: cadetblue;
+}
+
+#qrcode {
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#qrcode::after {
+    content: '';
+    clear: both;
+    height: 0;
+    display: block;
+}
+
+.sava-btn {
+    width: 50%;
+    margin: 256px auto auto auto;
+    text-align: center;
+}

@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-button (click)="openImage()">
+                <ion-icon color="secondary" size="small" slot="icon-only" name="image"></ion-icon>
+            </ion-button>
+            <ion-button (click)="goGenerateCodePage()">
+                <ion-icon color="secondary" slot="icon-only" name="qr-code" size="small"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button (click)="flashlight()">
+                <ion-icon color="secondary" slot="icon-only" name="flashlight" size="small"></ion-icon>
+            </ion-button>
+            <ion-button (click)="swaitchCamera()">
+                <ion-icon color="secondary" slot="icon-only" name="sync" size="small"></ion-icon>
+            </ion-button>
+            <ion-button (click)="goAppRate()">
+                <ion-icon color="secondary" slot="icon-only" name="star-half" size="small"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="content">
+    <div id="container"></div>
+    <canvas #canvasEl style="display: none;"></canvas>
+</ion-content>

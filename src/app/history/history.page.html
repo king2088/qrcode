@@ -1,0 +1,75 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>{{'HISTORY' | translate}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="clear()">
+                <ion-icon color="secondary" size="small" slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-segment (ionChange)="segmentChanged($event)" value="deHistory">
+            <ion-segment-button value="deHistory">
+                <ion-label>{{'SCAN_RECORD' | translate}}</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="genHistory">
+                <ion-label>{{'GENERATING_RECORDS' | translate}}</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ng-container *ngIf="isDecode">
+        <ion-card *ngFor="let item of decodeHistoryList;let i=index">
+            <ion-card-header>
+                <ion-card-subtitle>{{item.format}}<span style="float: right;">
+                        <ion-icon color="primary" size="small" slot="icon-only" name="close"
+                            (click)="deleteOneHistory(i)"></ion-icon>
+                    </span>
+                </ion-card-subtitle>
+                <!-- <ion-card-title>{{textType}}</ion-card-title> -->
+            </ion-card-header>
+            <ion-card-content>
+                <div
+                    [class]="item.text.indexOf('http://')>-1 || item.text.indexOf('https://')>-1?'url-text':'not-url-text'">
+                    {{item.text}}</div>
+                <div class="btn">
+                    <ion-button color="primary" size="small" class="btn-left" (click)="openUrl(item.text)"
+                        *ngIf="item.text.indexOf('http://')>-1 || item.text.indexOf('https://')>-1">
+                        <ion-icon name="browsers"></ion-icon>
+                        {{'OPEN_SITE' | translate}}
+                    </ion-button>
+                    <ion-button color="tertiary" size="small" class="btn-right" (click)="copy(item.text)">
+                        <ion-icon name="copy"></ion-icon>{{'COPY' | translate}}
+                    </ion-button>
+                </div>
+            </ion-card-content>
+        </ion-card>
+    </ng-container>
+    <ng-container *ngIf="!isDecode">
+        <ion-card *ngFor="let item of gencodeHistoryList">
+            <ion-card-header>
+                <ion-card-subtitle>{{item.format}}</ion-card-subtitle>
+                <!-- <ion-card-title>{{textType}}</ion-card-title> -->
+            </ion-card-header>
+            <ion-card-content>
+                <div
+                    [class]="item.text.indexOf('http://')>-1 || item.text.indexOf('https://')>-1?'url-text':'not-url-text'">
+                    {{item.text}}</div>
+                <div class="btn">
+                    <ion-button color="primary" size="small" class="btn-left" (click)="openUrl(item.text)"
+                        *ngIf="item.text.indexOf('http://')>-1 || item.text.indexOf('https://')>-1">
+                        <ion-icon name="browsers"></ion-icon>
+                        {{'OPEN_SITE' | translate}}
+                    </ion-button>
+                    <ion-button color="tertiary" size="small" class="btn-right" (click)="copy(item.text)">
+                        <ion-icon name="copy"></ion-icon>{{'COPY' | translate}}
+                    </ion-button>
+                </div>
+            </ion-card-content>
+        </ion-card>
+    </ng-container>
+
+
+</ion-content>
