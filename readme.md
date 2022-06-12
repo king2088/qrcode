@@ -193,7 +193,7 @@ ionic cordova platform rm ios;ionic cordova platform add ios;
 生成证书
 
 ```shell
-    # 证书生成   *密码XT#123*2020
+    # 证书生成
     keytool -genkey -v -keystore release-key.keystore -alias tony -keyalg RSA -keysize 2048 -validity 10000
 ```
 
@@ -203,9 +203,9 @@ ionic cordova platform rm ios;ionic cordova platform add ios;
     # 打包命令
     ionic cordova build android --prod --release
     # keytool -importkeystore -srckeystore release-key.keystore -destkeystore release-key.keystore -deststoretype pkcs12
-    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore release-key.keystore ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk tony
+    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore release-key.keystore ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk aliasName
     # Zipalign优化
-    cd C:/Users/Tony/AppData/Local/Android/Sdk/build-tools/29.0.3
+    cd C:/Users/xxxxx/AppData/Local/Android/Sdk/build-tools/29.0.3
     ./zipalign.exe -v 4 G:/ionic/qrcode-tab/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk ./tqrcode.apk
     cp ./tqrcode.apk G:/ionic/qrcode-tab
     rm -r ./tqrcode.apk
@@ -215,23 +215,23 @@ ionic cordova platform rm ios;ionic cordova platform add ios;
 
 ## 语言翻译文件对应表
 
-zh-CN 简体中文
-zh-TW 繁体台湾
-zh-HK 繁体香港
-en    英文
-af    荷兰语
-ar    阿拉伯语
-be    白俄罗斯
-cs    捷克
-da    丹麦
-fr    法语
-de    德国
-it    意大利
-ja    日语
-ko    韩语
-ru    俄罗斯
-es    西班牙
-sv    瑞典
-th    泰国
-uk    乌克兰
+zh-CN 简体中文  
+zh-TW 繁体台湾  
+zh-HK 繁体香港  
+en    英文  
+af    荷兰语  
+ar    阿拉伯语  
+be    白俄罗斯  
+cs    捷克  
+da    丹麦  
+fr    法语  
+de    德国  
+it    意大利  
+ja    日语  
+ko    韩语  
+ru    俄罗斯  
+es    西班牙  
+sv    瑞典  
+th    泰国  
+uk    乌克兰  
 vi    越南
